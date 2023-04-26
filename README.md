@@ -49,3 +49,9 @@ Download this file\
 https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv
 
 *Human transcriptome file also can found in 10X Visium homepage
+
+## Slide image file
+Slide image name with SRR00000000.png should be prepared in working directory
+
+## Downstream Analysis
+Rmd file
