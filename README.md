@@ -4,6 +4,7 @@ Automated spatial transcriptomics analysis pipeline
 ## Build Conda virtual envieonment
 Buid virtual environment for Spatial transcriptomics pipeline downloding yml file
 ```
+wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
 conda ~~yml
 ```
 
