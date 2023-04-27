@@ -9,7 +9,7 @@ bash Anaconda3-2023.03-1-Linux-x86_64.sh
 ```
 you can choose your download directory during downloading
 
-Buid conda virtual environment for Spatial transcriptomics pipeline with yml file/
+Build conda virtual environment for Spatial transcriptomics pipeline with yml file/
 yml file contains all necessary R packages and nextflow
 ```
 conda env create --name envname --file=DPST.yml
@@ -72,4 +72,4 @@ https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_
 Slide image name with SRR00000000.png should be prepared in working directory
 
 ## Downstream Analysis
-Rmd file
+Rmd file can be downloaded
