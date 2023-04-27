@@ -2,10 +2,27 @@
 Automated spatial transcriptomics analysis pipeline
 
 ## Build Conda virtual envieonment
-Buid virtual environment for Spatial transcriptomics pipeline downloding yml file
+Donwload anaconda in your working directory
 ```
 wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
-conda ~~yml
+bash Anaconda3-2023.03-1-Linux-x86_64.sh
+```
+you can choose your download directory during downloading
+
+Buid conda virtual environment for Spatial transcriptomics pipeline with yml file/
+yml file contains all necessary R packages and nextflow
+```
+conda env create --name envname --file=DPST.yml
+```
+
+Activate
+```
+conda activate envname
+```
+
+Deactivate
+```
+conda deactivate
 ```
 
 ## Create a Congif file
