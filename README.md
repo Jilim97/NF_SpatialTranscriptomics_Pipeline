@@ -25,6 +25,27 @@ Deactivate
 conda deactivate
 ```
 
+## Dowload necessary R packages
+STUtility which is necessary for saptial transcriptomic can be dowlnoaded following step.
+
+Activate and open R in conda environment
+```
+conda activate envname
+R
+```
+Dowload STUtility
+```
+devtools::install_github(
+    "jbergenstrahle/STUtility"
+)
+```
+Check whehter it works
+```
+library(STUtility)
+```
+Now you have all necessary R packages
+Extra R packages should be downloaded for further analysis over rscript from this page
+
 ## Create a Congif file
 Defaulf settings of parameters can be checked in nextflow.config file
 ```
