@@ -1,6 +1,6 @@
 ---
 title: "Downstream_Analysis"
-author: "Jinny Chun"
+author: "Jinny Chun, Jihwan Lim, Ali Muhammad"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -45,9 +45,13 @@ library("vembedr")
 
 Import the infotable including paths to the count matrix, coordinate metadata, json file, and images and create the object
 
-```{r load data}
-infoTable <- read.table("C:/Users/jinny/Rstudio/DP/info_table.csv", sep=";", header=T, stringsAsFactors = F)
-infoTable$sample_id <- paste0("sample_", 1:nrow(infoTable))
+```{r, sample1 (se1), CN73, warning=FALSE, results='hide'}
+samples <- list.files(pattern = "filtered", path = "./", recursive = T, full.names = T)
+json <- list.files(pattern = "scalefactors", path = "./", recursive = T, full.names = T)
+imgs <- list.files(pattern = "tissue_hires_image.png", path = "./", recursive = T, full.names = T)
+spotfiles <- list.files(pattern = "tissue_positions", path = "./", recursive = T, full.names = T)
+
+infoTable <- data.frame(samples, imgs, json, spotfiles, stringsAsFactors = F)
 ```
 
 ```{r create_seurat}
