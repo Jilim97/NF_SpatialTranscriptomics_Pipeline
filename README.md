@@ -64,9 +64,9 @@ wget -O spaceranger-2.0.1.tar.gz "https://cf.10xgenomics.com/releases/spatial-ex
 
 Install SpaceRanger
 ```
-$ cd /opt
+cd /opt
 [ download file from downloads page ]
-$ tar -xzvf spaceranger-2.0.1.tar.gz
+tar -xzvf spaceranger-2.0.1.tar.gz
 ```
 
 ## Download Reference Genome
