@@ -56,8 +56,8 @@ NXF_VER=20.04.0 nextflow run ST_Pipeline.nf --help
 
 ## Download SpaceRanger
 SpaceRanger should be downloded in your working directory before runnning Spatial transcriptomics pipeline\
-This can be checked in 10X Visium homepage\
-https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest
+This can be checked in 10X Genomics homepage\
+[10X Genomics download]<https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest>
 
 Download SpaceRanger
 ```
@@ -68,27 +68,27 @@ Install SpaceRanger in working directory
 ```
 tar -xzvf spaceranger-2.0.1.tar.gz
 ```
-*File name of spaceranger should kept same as spaceranger-2.0.1 (Check Spaceranger process in nextflow)
+**File name of spaceranger should kept same as spaceranger-2.0.1 (Check Spaceranger process in nextflow)**
 
 ## Download Reference Genome
 Reference Genome can be downloaded in 10X Visium hompage
 
 Mouse Reference Genome (Example fastq file can be run with this reference file\
-https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest
+[10X Genomics download]<https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest>
 ```
 wget https://cf.10xgenomics.com/supp/spatial-exp/refdata-gex-mm10-2020-A.tar.gz
 tar -xzvf refdata-gex-mm10-2020-A.tar.gz
 ```
 
-*Human reference genome can be found in 10X Visium hompage
+**Human reference genome can be found in 10X Visium hompage**
 
 ## Making Transcriptome file
 Transcriptome file (csv) can be downloaded in 10X Visium Hompage
 
 Download this file\
-https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv
+[10X Genomics mouse Transcriptome]<https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv>
 
-*Human transcriptome file also can found in 10X Visium homepage
+**Human transcriptome file also can found in 10X Visium homepage**
 
 ## Slide image file
 Slide image name with SRR00000000.png should be prepared in working directory
