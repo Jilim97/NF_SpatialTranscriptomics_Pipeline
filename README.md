@@ -43,7 +43,7 @@ Check whehter it works
 ```
 library(STUtility)
 ```
-Now you have all necessary R packages
+Now you have all necessary R packages/
 Extra R packages should be downloaded for further analysis over rscript from this page
 
 ## Create a Congif file
