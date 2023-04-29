@@ -1,7 +1,6 @@
-![NF Spatial Transcroptomics](https://github.ugent.be/jilim/NF_SpatialTranscripomics/blob/main/NF_Pipeline.jpg)
-
 # NF_SpatialTranscripomics
 Automated spatial transcriptomics analysis pipeline
+![NF Spatial Transcroptomics](https://github.ugent.be/jilim/NF_SpatialTranscripomics/blob/main/NF_Pipeline.jpg)
 
 ## Build Conda virtual envieonment
 Donwload anaconda in your working directory
