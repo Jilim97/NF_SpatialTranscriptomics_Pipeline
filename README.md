@@ -49,7 +49,7 @@ Extra R packages should be downloaded for further analysis over rscript from thi
 ## Create a Congif file
 Defaulf settings of parameters can be checked in nextflow.config file
 ```
-NXF_VER=20.04.0 nextflow run ST_P.nf --help
+NXF_VER=20.04.0 nextflow run ST_Pipeline.nf --help
 ```
 
 ## Download SpaceRanger
@@ -93,3 +93,9 @@ Slide image name with SRR00000000.png should be prepared in working directory
 
 ## Downstream Analysis
 Rmd file can be downloaded 
+
+## Murine Colon (FF)
+SRA_id: SRR17184260, SRR17184261
+
+
+## Human Ovarian Cancer (FFPE)
