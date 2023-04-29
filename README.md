@@ -49,7 +49,7 @@ Extra R packages should be downloaded for further analysis over rscript from thi
 ## Create a Congif file
 Defaulf settings of parameters can be checked in nextflow.config file
 ```
-NXF_VER=20.04.0 nextflow run ST.nf --help
+NXF_VER=20.04.0 nextflow run ST_P.nf --help
 ```
 
 ## Download SpaceRanger
