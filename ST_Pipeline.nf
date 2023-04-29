@@ -21,7 +21,7 @@ def helpMessage() {
     log.info"""
     Usage:
     The typical command for running the pipeline is as follows:
-    nextflow run space.nf nextflow.conifg
+    nextflow run ST_pipeline.nf nextflow.conifg
 
     Common arguments:
       --title                       Tissue name
