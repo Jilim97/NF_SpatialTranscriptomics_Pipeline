@@ -4,7 +4,7 @@
  * Authors:
  * - Jihwan Lim <Jihwan.Lim@ugent.be>
  * - Jinny Chun <>
- * - Ali Muhammad <>
+ * - Muhammad Ali <>
  */
 
 
