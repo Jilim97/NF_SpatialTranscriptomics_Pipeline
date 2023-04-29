@@ -57,7 +57,7 @@ NXF_VER=20.04.0 nextflow run ST_Pipeline.nf --help
 ## Download SpaceRanger
 SpaceRanger should be downloded in your working directory before runnning Spatial transcriptomics pipeline\
 This can be checked in 10X Genomics homepage\
-[10X Genomics download]<https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest>
+[10X Genomics download](https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest)
 
 Download SpaceRanger
 ```
@@ -74,7 +74,7 @@ tar -xzvf spaceranger-2.0.1.tar.gz
 Reference Genome can be downloaded in 10X Visium hompage
 
 Mouse Reference Genome (Example fastq file can be run with this reference file\
-[10X Genomics download]<https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest>
+[10X Genomics download](https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest)
 ```
 wget https://cf.10xgenomics.com/supp/spatial-exp/refdata-gex-mm10-2020-A.tar.gz
 tar -xzvf refdata-gex-mm10-2020-A.tar.gz
@@ -86,7 +86,7 @@ tar -xzvf refdata-gex-mm10-2020-A.tar.gz
 Transcriptome file (csv) can be downloaded in 10X Visium Hompage
 
 Download this file\
-[10X Genomics mouse Transcriptome]<https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv>
+[10X Genomics mouse Transcriptome](https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv)
 
 **Human transcriptome file also can found in 10X Visium homepage**
 
