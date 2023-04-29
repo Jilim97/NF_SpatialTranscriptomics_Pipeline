@@ -43,7 +43,7 @@ Check whehter it works
 ```
 library(STUtility)
 ```
-Now you have all necessary R packages/
+Now you have all necessary R packages\
 Extra R packages should be downloaded for further analysis over rscript from this page
 
 ## Create a Congif file
@@ -93,4 +93,4 @@ https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_
 Slide image name with SRR00000000.png should be prepared in working directory
 
 ## Downstream Analysis
-Rmd file can be downloaded
+Rmd file can be downloaded 
