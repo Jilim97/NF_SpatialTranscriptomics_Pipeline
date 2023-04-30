@@ -66,12 +66,12 @@ Install SpaceRanger in working directory
 ```
 tar -xzvf spaceranger-2.0.1.tar.gz
 ```
-**File name of spaceranger should kept same as spaceranger-2.0.1 (Check Spaceranger process in nextflow)**
+**File name of spaceranger should kept same as spaceranger-2.0.1 (Check spoaceranger process in pipeline)**
 
 ## Download Reference Genome
 Reference Genome can be downloaded in 10X Visium hompage
 
-Mouse Reference Genome (Example fastq file can be run with this reference file)
+Mouse Reference Genome (Example fastq file can be run with this reference file)\
 [10X Genomics Mouse Reference Genome](https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest)
 ```
 wget https://cf.10xgenomics.com/supp/spatial-exp/refdata-gex-mm10-2020-A.tar.gz
