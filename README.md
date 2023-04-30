@@ -10,7 +10,7 @@ bash Anaconda3-2023.03-1-Linux-x86_64.sh
 ```
 you can choose your download directory during downloading
 
-Build conda virtual environment for Spatial transcriptomics pipeline with yml file/
+Build conda virtual environment for Spatial transcriptomics pipeline with yml file\
 yml file contains all necessary R packages and nextflow
 ```
 conda env create --name envname --file=DPST.yml
@@ -44,7 +44,6 @@ Check whehter it works
 ```
 library(STUtility)
 ```
-Now you have all necessary R packages\
 Extra R packages should be downloaded for further analysis over rscript from this page
 
 ## Create a Congif file
