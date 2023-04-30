@@ -25,7 +25,15 @@ Deactivate
 ```
 conda deactivate
 ```
-**Necessary modules such as SRA toolkit should be downloaded in hpc server (Check NF_Pipeline.nf)**
+
+## Modules
+Pipeline can be run in hpc that contains sra toolkit modules
+Check whether versions of modules in NF_Pipeline.nf is available
+```
+ml spider parallel-fastq-dump
+ml spider fastqc
+ml spider multiqc
+```
 
 ## Dowload necessary R packages
 STUtility which is necessary for saptial transcriptomic can be dowlnoaded following step.
