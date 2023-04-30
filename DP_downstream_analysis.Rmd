@@ -1,6 +1,6 @@
 ---
 title: "Downstream_Analysis"
-author: "Jinny Chun, Jihwan Lim, Ali Muhammad"
+author: "Jinny Chun, Jihwan Lim, Muhammad Ali"
 date: "`r Sys.Date()`"
 output:
   html_document:
