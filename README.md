@@ -80,13 +80,14 @@ tar -xzvf refdata-gex-mm10-2020-A.tar.gz
 
 **Human reference genome can be found in 10X Visium hompage**
 
-## Making Transcriptome file
+## Example files 
+### Making Transcriptome file
 Transcriptome file (csv) can be downloaded in 10X Visium Hompage
 
 [10X Genomics Mouse Transcriptome](https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv)\
 [10X Genomics Human Transcriptome](https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Human_Transcriptome_Probe_Set_v1.0_GRCh38-2020-A.csv)
 
-## Slide image file
+### Slide image file
 Slide image name with SRR00000000.png should be prepared in working directory (ex. SRR17184260_image.png)
 
 ## Downstream Analysis
