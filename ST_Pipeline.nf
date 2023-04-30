@@ -36,7 +36,7 @@ def helpMessage() {
       --description                 Description of Tissue and Count matrix
       --ref_genome                  Path of reference genome (Pre-downloaded)
       --probe                       Probe set reference file with csv (Only for FFPE)
-      --slide                       Type of slide (No slide detail but FF is only available for visium-1)
+      --slide                       Type of slide (No slide detail but FF is only available for visium-1/V1, V2 = visium-1/V4 = visium-2/ V5 = visium-2-large)
       --imgrot                      Image roatation (Ture or Flase)
       --cores                       Number of core be used
       --mem                         Memory be used
