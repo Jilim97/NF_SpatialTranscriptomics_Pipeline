@@ -93,11 +93,11 @@ Slide image name with SRR00000000.png should be prepared in working directory (e
 ## Downstream Analysis
 Rmd file can be downloaded 
 
-## Murine Colon (FF)
+## Example Data:
+### Murine Colon (FF)
 SRA id: SRR17184260, SRR17184261\
 [GEO Murine colon](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190595)
 
-
-## Human Ovarian Cancer (FFPE)
+### Human Ovarian Cancer (FFPE)
 SRA id: SRR23770995, SRR23770997\
 [GEO Human Ovarian Cancer](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE227019)
