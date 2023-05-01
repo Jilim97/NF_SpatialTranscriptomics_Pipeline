@@ -1,5 +1,5 @@
 # NF_SpatialTranscripomics
-Automated spatial transcriptomics analysis pipeline
+Automated spatial transcriptomics analysis pipeline run on HPC
 ![NF Spatial Transcroptomics](https://github.ugent.be/jilim/NF_SpatialTranscripomics/blob/main/NF_Pipeline.jpg)
 
 ## Build Conda virtual envieonment
