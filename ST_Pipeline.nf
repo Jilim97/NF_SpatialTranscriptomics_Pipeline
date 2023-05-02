@@ -3,8 +3,8 @@
  * Spatial Transcriptomic pipeline
  * Authors:
  * - Jihwan Lim <Jihwan.Lim@ugent.be>
- * - Jinny Chun <>
- * - Muhammad Ali <>
+ * - Jinny Chun <Jinny.Chun@ugent.be>
+ * - Muhammad Ali <Muhali.Ali@ugent.be>
  */
 
 
