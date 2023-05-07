@@ -93,7 +93,6 @@ tar -xzvf refdata-gex-mm10-2020-A.tar.gz
 ### Making Transcriptome file
 Transcriptome file (csv) can be downloaded in 10X Visium Hompage
 
-[10X Genomics Mouse Transcriptome](https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Mouse_Transcriptome_Probe_Set_v1.0_mm10-2020-A.csv)\
 [10X Genomics Human Transcriptome](https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Human_Transcriptome_Probe_Set_v1.0_GRCh38-2020-A.csv)
 
 ### Slide image file
