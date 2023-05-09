@@ -1,6 +1,6 @@
 ---
 title: "Downstream_Analysis"
-author: "Jinny Chun, Jihwan Lim, Muhammad Ali"
+author: "Jinny Chun"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -45,13 +45,9 @@ library("vembedr")
 
 Import the infotable including paths to the count matrix, coordinate metadata, json file, and images and create the object
 
-```{r, sample1 (se1), CN73, warning=FALSE, results='hide'}
-samples <- list.files(pattern = "filtered", path = "./", recursive = T, full.names = T)
-json <- list.files(pattern = "scalefactors", path = "./", recursive = T, full.names = T)
-imgs <- list.files(pattern = "tissue_hires_image.png", path = "./", recursive = T, full.names = T)
-spotfiles <- list.files(pattern = "tissue_positions", path = "./", recursive = T, full.names = T)
-
-infoTable <- data.frame(samples, imgs, json, spotfiles, stringsAsFactors = F)
+```{r load data}
+infoTable <- read.table("C:/Users/jinny/Rstudio/DP/info_table.csv", sep=";", header=T, stringsAsFactors = F)
+infoTable$sample_id <- paste0("sample_", 1:nrow(infoTable))
 ```
 
 ```{r create_seurat}
@@ -75,8 +71,8 @@ ImagePlot(se, method = "raster")
 nFeature_RNA is the total number of genes in each cell that have at least one UMI count. nCount_RNA is the total number of molecules detected within a cell. Low nFeature_RNA for a cell indicates that it may be dead/dying or an empty droplet. High nCount_RNA and/or nFeature_RNA indicates that the "cell" may in fact be a doublet (or multiplet). 
 
 ```{r plot_features, fig.width=7, fig.height=7}
-ST.FeaturePlot(se, features = c("nFeature_RNA"),indices = 1, pt.size = 2.5)
-ST.FeaturePlot(se, features = c("nFeature_RNA"),indices = 2, pt.size = 2.5)
+for (i in 1:nrow(infoTable)){print(ST.FeaturePlot(se, features = c("nFeature_RNA"),indices = i, pt.size = 2.5))}
+
 ```
 
 ```{r qc_violin, fig.width=8, fig.height=6}
@@ -107,14 +103,17 @@ head(VariableFeatures(se),10)
 ```
 
 ```{r, spatial plot with variable gene expression}
-ST.FeaturePlot(se, features = c(head(VariableFeatures(se),2)), split.labels = F, indices = 1,pt.size = 2.5)
-ST.FeaturePlot(se, features = c(head(VariableFeatures(se),2)), split.labels = F, indices = 2,pt.size = 2.5)
+
+
+for (i in 1:nrow(infoTable)){print(ST.FeaturePlot(se, features = c(head(VariableFeatures(se),2)), split.labels = F, indices = i,pt.size = 2.5))}
+
+
 ```
 
 ```{r, sptial plot with sample images}
-FeatureOverlay(se, features = c(head(VariableFeatures(se),2)), spots = rownames(subset(se[[]])),sampleids = 1, pt.alpha = 0.8, pt.size = 2.5)
 
-FeatureOverlay(se, features = c(head(VariableFeatures(se),2)), spots = rownames(subset(se[[]])),sampleids = 2, pt.alpha = 0.8, pt.size = 2.5)
+for (i in 1:nrow(infoTable)){print(FeatureOverlay(se, features = c(head(VariableFeatures(se),2)), spots = rownames(subset(se[[]])),sampleids = i, pt.alpha = 0.8, pt.size = 2.5))}
+
 ```
 
 
@@ -122,9 +121,10 @@ FeatureOverlay(se, features = c(head(VariableFeatures(se),2)), spots = rownames(
 
 ```{r dim.cluster}
 se <- RunPCA(se, assay = "SCT", verbose = FALSE)
+se <- RunUMAP(se, dims = 1:30, verbose = FALSE)
 se <- FindNeighbors(se, reduction = "pca", dims = 1:30)
 se <- FindClusters(se, verbose = FALSE)
-se <- RunUMAP(se, reduction = "pca", dims = 1:30)
+#se <- RunUMAP(se, reduction = "pca", dims = 1:30)
 ```
 
 
@@ -134,9 +134,7 @@ Make feature plots
 ```{r, feature plots}
 se <- SetIdent(se, value = "seurat_clusters")
 
-ST.FeaturePlot(se, features = "seurat_clusters", split.labels = F, indices = 1,pt.size = 2.5)
-
-ST.FeaturePlot(se, features = "seurat_clusters", split.labels = F, indices = 2,pt.size = 2.5)
+for (i in 1:nrow(infoTable)){print(ST.FeaturePlot(se, features = "seurat_clusters", split.labels = F, indices = i,pt.size = 2.5))}
 
 ```
 
@@ -150,9 +148,8 @@ Overlay clusters on the images
 
 ```{r, spatial plots with slide images}
 
-FeatureOverlay(se, features = "seurat_clusters", spots = rownames(subset(se[[]])),sampleids = 1, pt.alpha = 0.8, pt.size = 3.2)
+for (i in 1:nrow(infoTable)){print(FeatureOverlay(se, features = "seurat_clusters", spots = rownames(subset(se[[]])),sampleids = i, pt.alpha = 0.8, pt.size = 3.2))}
 
-FeatureOverlay(se, features = "seurat_clusters", spots = rownames(subset(se[[]])),sampleids = 2, pt.alpha = 0.8, pt.size = 3.5)
 ```
 
 ## Differential gene expression analysis
