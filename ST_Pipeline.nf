@@ -160,7 +160,7 @@ process SpaceRanger {
     label 'big_mem'
     time '8h'
 
-    tag "Mkaing count matrix of ${sra_id}"
+    tag "Making count matrix of ${sra_id}"
 
     //publishDir "${params.basedir}", mode: 'copy', overwrite: true
 
