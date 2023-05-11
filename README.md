@@ -87,7 +87,8 @@ Transcriptome file (csv) can be downloaded in 10X Visium Hompage
 [10X Genomics Human Transcriptome](https://cf.10xgenomics.com/supp/spatial-exp/probeset/Visium_Human_Transcriptome_Probe_Set_v1.0_GRCh38-2020-A.csv)
 
 ### Slide image file
-Slide image name with SRR00000000.png should be prepared in working directory (ex. SRR17184260_image.png)
+Slide image name with SRR00000000.png should be prepared in working directory (ex. SRR17184260_image.png)\
+Ohter extension of image file can be available (Check nextflow.config)
 
 ## Downstream Analysis
 Rmd file can be downloaded 
