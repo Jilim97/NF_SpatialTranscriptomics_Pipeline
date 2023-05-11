@@ -26,15 +26,6 @@ Deactivate
 conda deactivate
 ```
 
-## Modules
-Pipeline can be run in hpc that contains sra toolkit modules
-Check whether versions of modules in NF_Pipeline.nf is available
-```
-ml spider parallel-fastq-dump
-ml spider fastqc
-ml spider multiqc
-```
-
 ## Dowload necessary R packages
 STUtility which is necessary for saptial transcriptomic can be dowlnoaded following step.
 
@@ -58,7 +49,7 @@ Extra R packages should be downloaded for further analysis over rscript from thi
 ## Create a Congif file
 Defaulf settings of parameters can be checked in nextflow.config file
 ```
-NXF_VER=20.04.0 nextflow run ST_Pipeline.nf --help
+nextflow run ST_Pipeline.nf --help
 ```
 
 ## Download SpaceRanger
