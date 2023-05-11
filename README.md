@@ -100,3 +100,9 @@ SRA id: SRR17184260, SRR17184261\
 #### Human Ovarian Cancer (FFPE)
 SRA id: SRR23770995, SRR23770997\
 [GEO of Human Ovarian Cancer dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE227019)
+
+## Run
+If you complete all step above, now you are ready to run pipeline!
+```
+nextflow run ST_Pipeline.nf nextflow.conifg
+```
