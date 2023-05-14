@@ -112,14 +112,14 @@ Rmd file can be downloaded
 ## Example Data:
 #### Murine Colon (FF)
 SRA id: SRR17184260, SRR17184261\
-[GEO of Murine Colon dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190595)\
+[GEO of Murine Colon dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190595)
 
 Parigi, S. M., Larsson, L., Das, S., Ramirez Flores, R. O., Frede, A., Tripathi, K. P., Diaz, O. E., Selin, K., Morales, R. A., Luo, X., Monasterio, G., Engblom, C., Gagliani, N., Saez-Rodriguez, J., Lundeberg, J., & Villablanca, E. J. (2022). The spatial transcriptomic landscape of the healing mouse intestine following damage. Nature communications, 13(1), 828. https://doi.org/10.1038/s41467-022-28497-0
 
 
 #### Human Ovarian Cancer (FFPE)
 SRA id: SRR23770995, SRR23770997\
-[GEO of Human Ovarian Cancer dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE227019)\
+[GEO of Human Ovarian Cancer dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE227019)
 
 Iamshchikov, Pavel & Larionova, Irina & Gerashchenko, Tatiana & Denis, Piankov & Philipp, Koshkin & Sergei, Korostelev & Denisov, Evgeny. (2023). Comparison of the Illumina NextSeq 2000 and GeneMind Genolab M sequencing platforms for spatial transcriptomics. BMC Genomics. 24. 10.1186/s12864-023-09192-w. 
 
