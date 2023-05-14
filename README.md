@@ -54,7 +54,7 @@ nextflow run ST_Pipeline.nf --help
 
 ## Build Module environment
 Extra modules are necessary for running this pipeline\
-Build conda virtual environment for modules with yml file\
+Build conda virtual environment for modules with yml file
 
 ```
 conda env create --name modules --file=modules.yml
