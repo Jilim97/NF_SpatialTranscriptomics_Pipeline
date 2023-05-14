@@ -52,6 +52,21 @@ Default settings of parameters can be checked in nextflow.config file
 nextflow run ST_Pipeline.nf --help
 ```
 
+## Build Module environment
+Extra modules are necessary for running this pipeline\
+Build conda virtual environment for modules with yml file\
+
+```
+conda env create --name modules --file=modules.yml
+```
+
+The path of environment should be modified by users depending on users' directory of anaconda\
+conda '/your/own/path/of/anaconda3/envs/modules'\
+There are three lines to modify in nextflow script, Check the line and its process name
+**FasterqDump: Line 103**
+**FastQC: Line 164**
+**MultiQC: Line 189**
+
 ## Download SpaceRanger
 SpaceRanger should be downloaded in your working directory before running Spatial transcriptomics pipeline\
 This can be checked in 10X Genomics homepage\
