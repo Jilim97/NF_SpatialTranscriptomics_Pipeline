@@ -66,7 +66,7 @@ There are three lines to modify in nextflow script, Check the line and its proce
 You don't need to activate it.\
 **FasterqDump: Line 103**\
 **FastQC: Line 164**\
-**MultiQC: Line 189**\
+**MultiQC: Line 189**
 
 ## Download SpaceRanger
 SpaceRanger should be downloaded in your working directory before running Spatial transcriptomics pipeline\
