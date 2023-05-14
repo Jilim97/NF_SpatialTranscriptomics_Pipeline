@@ -15,6 +15,7 @@
  * Probeset should be pre-downloaded in working directory
  * Check 10XGenomics homepage for SpaceRanger, Reference Genome, and Probeset: https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest
  * Image file of Spaceranger should be pre-downloaded in working directory with SRA_ID name (ex:SRRxxxxxxxx_image.png) other extension allowed
+ * Path of module environment should be changed depending on users' environment directory
  */
 
 def helpMessage() {
