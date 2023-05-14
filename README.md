@@ -62,10 +62,11 @@ conda env create --name modules --file=modules.yml
 
 The path of environment should be modified by users depending on users' directory of anaconda\
 conda '/your/own/path/of/anaconda3/envs/modules'\
-There are three lines to modify in nextflow script, Check the line and its process name
-**FasterqDump: Line 103**
-**FastQC: Line 164**
-**MultiQC: Line 189**
+There are three lines to modify in nextflow script, Check the line and its process name\
+You don't need to activate it.\
+**FasterqDump: Line 103**\
+**FastQC: Line 164**\
+**MultiQC: Line 189**\
 
 ## Download SpaceRanger
 SpaceRanger should be downloaded in your working directory before running Spatial transcriptomics pipeline\
