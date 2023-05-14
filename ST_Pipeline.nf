@@ -11,10 +11,10 @@
 /*
  * Defines some parameters for analysis in a nextflow.config file
  * SpaceRanger should be pre-downloaded in working directory
- * Refernce Genome should be pre-downloaded in working directory
+ * Reference Genome should be pre-downloaded in working directory
  * Probeset should be pre-downloaded in working directory
  * Check 10XGenomics homepage for SpaceRanger, Reference Genome, and Probeset: https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest
- * Image file of Spaceranger should be pre-downloaded in working directory with SRA_ID name (ex:SRRxxxxxxxx_image.png) other extension allowed
+ * Image file of Spaceranger should be pre-downloaded in working directory with SRA_ID name (ex:SRRxxxxxxxx_image.png) other extensions are allowed
  * Path of module environment should be changed depending on users' environment directory
  */
 
@@ -34,22 +34,22 @@ def helpMessage() {
       --fastq_directory             Path of raw fastq files already downloaded
 
     FasterqDump arguments:
-      --sra_id                      Path of txt file containings SRA IDs
-      --threads_down                Number of core be used for downloding file
+      --sra_id                      Path of txt file containing SRA IDs
+      --threads_down                Number of cores to be used for downloading files
 
     Rename_SR arguments:
       --zip                         Whether file compressed (True or False)
-      --threads_zip                 Number of core be used for compressing file
+      --threads_zip                 Number of cores to be used for compressing files
 
     Spaceranger arguments:
       --slide_type                  Slide type (FF or FFPE)
       --description                 Description of Tissue and Count matrix
       --ref_genome                  Path of reference genome (Pre-downloaded)
-      --extension                   Select extension of image file (ex. png, jpg, jpeg)
+      --extension                   Select the extension of an image file (ex. png, jpg, jpeg)
       --probe                       Path of probe set file with csv (Only for FFPE)
       --slide                       Type of slide (No slide detail but FF is only available for visium-1/visium-1 or visium-2 or visium-2-large)
       --imgrot                      Image roatation (Ture or Flase)
-      --cores                       Number of core be used
+      --cores                       Number of cores to be used
       --mem                         Memory be used
 
     KnitR arguments:
@@ -64,7 +64,7 @@ if (params.help){
 }
 
 log.info """\
-  SPATIL TRANSCRIPTOMICS P I P E L I N E
+  SPATIAL TRANSCRIPTOMICS P I P E L I N E
  ==============================================
  Design_Project_G2
  ==============================================
@@ -75,7 +75,7 @@ log.info """\
  Compressed: ${params.zip}
  """
 
-// Find raw fastq file with name containing sra_id or specific_id or tag
+// Find raw fastq file with a name containing sra_id or specific_id or tag
 process Find {
     label 'low_mem'
     time '1h'
@@ -95,7 +95,7 @@ process Find {
     """
 }
 
-// Donwload raw fastq files from NCBI SRA selector 
+// Download raw fastq files from NCBI SRA selector 
 process FasterqDump {
     label 'mid_mem'
     time '2h'
@@ -120,7 +120,7 @@ process FasterqDump {
     """
 }
 
-// If file is not compressed, compress then rename into format that is required for spaceranger running
+// If file is not compressed, compress then rename it into the format that is required for spaceranger running
 process Rename_SR {
     label 'mid_mem'
     time '4h'
