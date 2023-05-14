@@ -2,9 +2,9 @@
 /*
  * Spatial Transcriptomic pipeline
  * Authors:
- * - Jihwan Lim <Jihwan.Lim@ugent.be>
- * - Jinny Chun <Jinny.Chun@ugent.be>
- * - Muhammad Ali <Muhali.Ali@ugent.be>
+ * - Jihwan Lim <jihwan.lim@ugent.be>
+ * - Jinny Chun <jinny.chun@ugent.be>
+ * - Ali Muhammad <muhali.ali@ugent.be>
  */
 
 
@@ -12,8 +12,9 @@
  * Defines some parameters for analysis in a nextflow.config file
  * SpaceRanger should be pre-downloaded in working directory
  * Refernce Genome should be pre-downloaded in working directory
- * Check 10XGenomics homepage for SpaceRanger and Reference Genome: https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest
- * Image file of Spaceranger should be pre-downloaded in working directory with SRA_ID name (ex:SRRxxxxxxxx_image.png)
+ * Probeset should be pre-downloaded in working directory
+ * Check 10XGenomics homepage for SpaceRanger, Reference Genome, and Probeset: https://support.10xgenomics.com/spatial-gene-expression/software/downloads/latest
+ * Image file of Spaceranger should be pre-downloaded in working directory with SRA_ID name (ex:SRRxxxxxxxx_image.png) other extension allowed
  */
 
 def helpMessage() {
@@ -21,22 +22,31 @@ def helpMessage() {
     log.info"""
     Usage:
     The typical command for running the pipeline is as follows:
-    nextflow run ST_pipeline.nf nextflow.conifg
+    nextflow run ST_Pipeline.nf nextflow.conifg
 
     Common arguments:
       --title                       Tissue name
-      --basedir                     Path to working directory
-      
-    FastqDump arguments:
-      --sra_id                      List of SRA ID
-      --threads                     Number of core be use
-      
+      --basedir                     Path of working directory
+      --Existing                    Whether file existing (True or False)
+    
+    Find arguments:
+      --fastq_directory             Path of raw fastq files already downloaded
+
+    FasterqDump arguments:
+      --sra_id                      Path of txt file containings SRA IDs
+      --threads_down                Number of core be used for downloding file
+
+    Rename_SR arguments:
+      --zip                         Whether file compressed (True or False)
+      --threads_zip                 Number of core be used for compressing file
+
     Spaceranger arguments:
       --slide_type                  Slide type (FF or FFPE)
       --description                 Description of Tissue and Count matrix
       --ref_genome                  Path of reference genome (Pre-downloaded)
-      --probe                       Probe set reference file with csv (Only for FFPE)
-      --slide                       Type of slide (No slide detail but FF is only available for visium-1/V1, V2 = visium-1/V4 = visium-2/ V5 = visium-2-large)
+      --extension                   Select extension of image file (ex. png, jpg, jpeg)
+      --probe                       Path of probe set file with csv (Only for FFPE)
+      --slide                       Type of slide (No slide detail but FF is only available for visium-1/visium-1 or visium-2 or visium-2-large)
       --imgrot                      Image roatation (Ture or Flase)
       --cores                       Number of core be used
       --mem                         Memory be used
@@ -55,97 +65,134 @@ if (params.help){
 log.info """\
   SPATIL TRANSCRIPTOMICS P I P E L I N E
  ==============================================
- Design_Project_G4
+ Design_Project_G2
  ==============================================
  Cell type: ${params.title}
  working directory : ${params.basedir}
  Output directory : ${params.basedir}/results
+ File existing: ${params.Existing}
+ Compressed: ${params.zip}
  """
 
+// Find raw fastq file with name containing sra_id or specific_id or tag
+process Find {
+    label 'low_mem'
+    time '1h'
 
-process FastqDump {
-    label 'mid_mem'
-    time '2h'
-
-    tag "Downlod ${sra_id}"
-    
-    module 'parallel-fastq-dump/0.6.6-GCCcore-9.3.0-SRA-Toolkit-3.0.0-Python-3.8.2'
-    
-    //publishDir "${params.basedir}/results/fastq", mode: 'copy', overwrite: true
+    tag "Finding raw ${sra_id}_fastq files"
 
     input:
-    val sra_id from params.sra_id
+    tuple val(sra_id)
 
     output:
-    tuple val(sra_id), path("${sra_id}_fastq") into fastq_files
+    tuple val(sra_id), path("${sra_id}_fastq") 
 
     script:
     """
     mkdir "${sra_id}_fastq"
-    parallel-fastq-dump --sra-id ${sra_id} --split-files --gzip --threads ${params.threads} --outdir ${sra_id}_fastq/
+    cp -r ${params.fastq_directory}/${sra_id}_* ./${sra_id}_fastq
     """
 }
 
+// Donwload raw fastq files from NCBI SRA selector 
+process FasterqDump {
+    label 'mid_mem'
+    time '2h'
 
+    conda '/kyukon/data/gent/vo/000/gvo00095/vsc45456/anaconda3/envs/modules'
+
+    tag "Download ${sra_id}"
+    
+    //publishDir "${params.basedir}/results/fastq", mode: 'copy', overwrite: true
+
+    input:
+    val sra_id 
+
+    output:
+    tuple val(sra_id), path("${sra_id}_fastq") 
+
+    script:
+    """
+    mkdir "${sra_id}_fastq"
+    prefetch -X 100000000 ${sra_id} 
+    fasterq-dump -e ${params.threads_down} -t \$PWD --include-technical --split-files -O ${sra_id}_fastq ${sra_id}
+    """
+}
+
+// If file is not compressed, compress then rename into format that is required for spaceranger running
 process Rename_SR {
-    label 'low_mem'
-    time '1h'
+    label 'mid_mem'
+    time '4h'
 
     tag "Renaming for SpaceRanger input"
 
     publishDir "${params.basedir}/results/fastq_rename", mode: 'copy', overwrite: true
 
     input:
-    tuple val(sra_id), path(fastq) from fastq_files
+    tuple val(sra_id), path(fastq) 
 
     output:
-    tuple val(sra_id), path("${sra_id}_rename") into rename_fastq
+    tuple val(sra_id), path("${sra_id}_rename") 
 
+    script:
+    if (params.zip == "False" )
+    """
+    mkdir "${sra_id}_rename"
+    pigz -p${params.threads_zip} ${fastq}/${sra_id}_1.fastq
+    pigz -p${params.threads_zip} ${fastq}/${sra_id}_2.fastq
+
+    mv "${fastq}/${sra_id}_1.fastq.gz" "${sra_id}_rename/${sra_id}_S1_L001_R1_001.fastq.gz"
+    mv "${fastq}/${sra_id}_2.fastq.gz" "${sra_id}_rename/${sra_id}_S1_L001_R2_001.fastq.gz"
+    """
+    else if (params.zip == "True")
     """
     mkdir "${sra_id}_rename"
     mv "${fastq}/${sra_id}_1.fastq.gz" "${sra_id}_rename/${sra_id}_S1_L001_R1_001.fastq.gz"
     mv "${fastq}/${sra_id}_2.fastq.gz" "${sra_id}_rename/${sra_id}_S1_L001_R2_001.fastq.gz"
     """
+    else
+        error "True or False only available: ${params.zip}"
 }
 
-rename_fastq.into{fastqc_ch; spaceR_ch} //Duplicate channel for multi usage
 
+// Quality Control
 process FastQC {
     label 'mid_mem'
     time '2h'
 
+    conda '/kyukon/data/gent/vo/000/gvo00095/vsc45456/anaconda3/envs/modules'    
+
     tag "QC on ${sra_id}"
-    
-    module "FastQC/0.11.9-Java-11"
 
     publishDir "${params.basedir}/results/fastqc", mode: 'copy', overwrite: true
 
     input:
-    tuple val(sra_id), path(fastq) from fastqc_ch
+    tuple val(sra_id), path(fastq) 
 
     output:
-    path("${sra_id}_fastqc") into qc_results
+    path("${sra_id}_fastqc")
 
+    script:
     """
     mkdir "${sra_id}_fastqc"
-    fastqc ${fastq}/* -o ${sra_id}_fastqc
+    fastqc --outdir ${sra_id}_fastqc -noextract ${fastq}/*
     """
 }
 
-qc_ch = qc_results.collect()
+
 
 process MultiQC {
     label 'mid_mem'
     time '2h'
-    
-    tag "Generating multiQC report"
 
-    module "MultiQC/1.9-intel-2020a-Python-3.8.2"
+    conda '/kyukon/data/gent/vo/000/gvo00095/vsc45456/anaconda3/envs/modules' 
+
+    tag "Generating multiQC report"
 
     publishDir "${params.basedir}/results/multiQC", mode: 'copy', overwrite: true
 
     input:
-    path(fastq) from qc_ch
+    path(fastq) 
 
     output:
     file("*.html") 
@@ -156,19 +203,20 @@ process MultiQC {
     """
 }
 
+// Run Spaceranger
 process SpaceRanger {
     label 'big_mem'
     time '8h'
 
-    tag "Making count matrix of ${sra_id}"
+    tag "Mkaing count matrix of ${sra_id}"
 
     //publishDir "${params.basedir}", mode: 'copy', overwrite: true
 
     input:
-    tuple val(sra_id), path(fastq_file) from spaceR_ch
+    tuple val(sra_id), path(fastq_file)
 
     output:
-    tuple val(sra_id), path("${sra_id}_count") into space_ch
+    tuple val(sra_id), path("${sra_id}_count") 
 
     script:
     if (params.slide_type == "FF" )
@@ -179,7 +227,7 @@ process SpaceRanger {
         --description="${params.description}" \
         --transcriptome=${params.ref_genome} \
         --fastqs=${fastq_file} \
-        --image=${params.basedir}/${sra_id}_image.png \
+        --image=${params.basedir}/${sra_id}_image.${params.extension} \
         --unknown-slide=${params.slide} \
         --reorient-images=${params.imgrot} \
         --localcores=${params.cores} \
@@ -194,7 +242,7 @@ process SpaceRanger {
         --transcriptome=${params.ref_genome} \
         --probe-set=${params.probe} \
         --fastqs=${fastq_file} \
-        --image=${params.basedir}/${sra_id}_image.png \
+        --image=${params.basedir}/${sra_id}_image.${params.extension} \
         --unknown-slide=${params.slide} \
         --reorient-images=${params.imgrot} \
         --localcores=${params.cores} \
@@ -204,6 +252,7 @@ process SpaceRanger {
         error "Invalid slide type: ${params.slide_type}"
 }
 
+// Rename for R analysis
 process Rename_R {
     label 'low_mem'
     time '1h'
@@ -213,10 +262,10 @@ process Rename_R {
     publishDir "${params.basedir}/results", mode: 'copy', overwrite: true
 
     input:
-    tuple val(sra_id), path(count_matrix) from space_ch
+    tuple val(sra_id), path(count_matrix) 
 
     output:
-    path "${sra_id}_matrix" into Rename_ch
+    path "${sra_id}_matrix" 
 
     script:
     """
@@ -225,7 +274,6 @@ process Rename_R {
 
 }
 
-R_ch = Rename_ch.collect() //Collect all output files from SpaceRanger for running R at once
 
 process KnitR {
     label 'low_mem'
@@ -236,14 +284,55 @@ process KnitR {
     publishDir "${params.basedir}/results", mode: 'copy', overwrite: true
 
     input:
-    path(R) from R_ch
-    path(script) from params.R
+    path(R) 
+    path(script) 
 
     output:
-    file("*.html")
+    tuple file("*.html"), file("*.rds")
 
     script:
     """
     Rscript -e "rmarkdown::render('${script}', output_file='STAnalysis_for_${params.title}.html', params = list(data = '${params.title}'), 'html_document')"
     """
+}
+
+workflow{
+    sampleIDs = Channel
+        .fromPath(params.sra_id)
+        .splitText()
+        .map{it -> it.trim()}
+
+    if (params.Existing == "False" ){
+
+        fastq_files = FasterqDump(sampleIDs) 
+        rename_fastq = Rename_SR(fastq_files)
+
+        qc_results = FastQC(rename_fastq)
+        MultiQC( qc_results.collect() )
+
+        space_ch = SpaceRanger(rename_fastq)
+        Rename_ch = Rename_R(space_ch)
+
+        Rch = Channel.fromPath( params.R )
+
+        KnitR( Rename_ch.collect(), Rch )
+    }
+    else if (params.Existing == "True"){
+
+        fastq_files = Find(sampleIDs) 
+        rename_fastq = Rename_SR(fastq_files)
+
+        qc_results = FastQC(rename_fastq)
+        MultiQC( qc_results.collect() )
+
+        space_ch = SpaceRanger(rename_fastq)
+        Rename_ch = Rename_R(space_ch)
+
+        Rch = Channel.fromPath( params.R )
+
+        KnitR( Rename_ch.collect(), Rch )
+    }
+    else{
+        error "Invalid parameters: ${params.fastq}"
+    }
 }
